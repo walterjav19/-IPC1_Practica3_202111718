@@ -4,8 +4,8 @@ premios=0
 paredes=0
 fantasmas=0
 punteo=0
-posicionx=0
-posiciony=0
+fila=randint(0,4)
+columna=randint(0,5)
 nombre=""
 tablero=[[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]
@@ -23,19 +23,49 @@ def imprimirtablero(pre,par,fan):
         posiciony=randint(0,5)
         tablero[posicionx][posiciony]="X"
     for x in range(0,fan):
-        posicionx=randint(0,4)
-        posiciony=randint(0,5)
+        posiciony=randint(0,4)
+        posicionx=randint(0,5)
         tablero[posicionx][posiciony]="@"
+    tablero[fila][columna]="<"  
 
-
-    print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo} ")
+    print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
     print("---------------")
     for i in range(0,5):
          print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")
     print("---------------")
 
-def imprimirpos(fila,columna):
-    print(fila,columna)
+
+def actualizartablero(movimiento):
+    if movimiento=="w":
+        print("te moviste arriba")
+        print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
+        print("---------------")
+        for i in range(0,5):
+            print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
+        print("---------------")
+        print(fila,columna)
+    elif movimiento=="a":
+        print("te moviste a la izquierda")
+        print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
+        print("---------------")
+        for i in range(0,5):
+            print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
+        print("---------------")
+    elif movimiento=="s":
+        print("te moviste abajo")
+        print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
+        print("---------------")
+        for i in range(0,5):
+            print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
+        print("---------------")
+    elif movimiento=="d":
+        print("te moviste a la derecha")
+        print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
+        print("---------------")
+        for i in range(0,5):
+            print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
+        print("---------------")
+
 
 
 while opcion!=2:
@@ -47,9 +77,8 @@ while opcion!=2:
         paredes=randint(5,12)
         fantasmas=randint(1,6)
         imprimirtablero(premios,paredes,fantasmas)
-        print(premios,paredes,fantasmas)
-        imprimirpos(posicionx,posiciony)
-        move=input("")                     
+        move=input("")
+        actualizartablero(move.lower())                     
     elif opcion==2:
         print("Salio del juego")
     else:
