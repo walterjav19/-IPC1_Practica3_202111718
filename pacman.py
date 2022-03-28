@@ -1,3 +1,4 @@
+from operator import index
 from random import randint
 opcion=0
 premios=0
@@ -7,6 +8,7 @@ punteo=0
 fila=randint(0,4)
 columna=randint(0,5)
 nombre=""
+ganar=False
 tablero=[[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]
@@ -15,17 +17,17 @@ tablero=[[" "," "," "," "," "," "]
 
 def imprimirtablero(pre,par,fan):
     for x in range(0,pre):
-        posicionx=randint(0,4)
-        posiciony=randint(0,5)
-        tablero[posicionx][posiciony]="O"
+        fil=randint(0,4)
+        col=randint(0,5)
+        tablero[fil][col]="O"
     for x in range(0,par):
-        posicionx=randint(0,4)
-        posiciony=randint(0,5)
-        tablero[posicionx][posiciony]="X"
+        fil=randint(0,4)
+        col=randint(0,5)
+        tablero[fil][col]="X"
     for x in range(0,fan):
-        posiciony=randint(0,4)
-        posicionx=randint(0,5)
-        tablero[posicionx][posiciony]="@"
+        fil=randint(0,4)
+        col=randint(0,5)
+        tablero[fil][col]="@"
     tablero[fila][columna]="<"  
 
     print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
@@ -35,16 +37,25 @@ def imprimirtablero(pre,par,fan):
     print("---------------")
 
 
-def actualizartablero(movimiento):
+def actualizartablero():
+    movimiento=input("")
+    global fila
+    global columna
+    global punteo
     if movimiento=="w":
+        tablero[fila][columna]=" "
+        fila=fila-1
+        tablero[fila][columna]="<"
         print("te moviste arriba")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
-        print(fila,columna)
     elif movimiento=="a":
+        tablero[fila][columna]=" "
+        columna=columna-1
+        tablero[fila][columna]="<"
         print("te moviste a la izquierda")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
         print("---------------")
@@ -52,6 +63,9 @@ def actualizartablero(movimiento):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
     elif movimiento=="s":
+        tablero[fila][columna]=" "
+        fila=fila+1
+        tablero[fila][columna]="<"
         print("te moviste abajo")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
         print("---------------")
@@ -59,12 +73,20 @@ def actualizartablero(movimiento):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
     elif movimiento=="d":
+        tablero[fila][columna]=" "
+        columna=columna+1
+        tablero[fila][columna]="<"
         print("te moviste a la derecha")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
+    elif movimiento == "f":
+        print("ganar=true")
+        ganar=True
+    if tablero[fila][columna]=="O":
+        punteo=punteo+10        
 
 
 
@@ -77,8 +99,8 @@ while opcion!=2:
         paredes=randint(5,12)
         fantasmas=randint(1,6)
         imprimirtablero(premios,paredes,fantasmas)
-        move=input("")
-        actualizartablero(move.lower())                     
+        while ganar !=True:
+            actualizartablero()        
     elif opcion==2:
         print("Salio del juego")
     else:
