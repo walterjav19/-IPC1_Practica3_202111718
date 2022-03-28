@@ -7,6 +7,7 @@ fantasmas=0
 punteo=0
 fila=randint(0,4)
 columna=randint(0,5)
+vida=1
 nombre=""
 ganar=False
 tablero=[[" "," "," "," "," "," "]
@@ -43,16 +44,22 @@ def actualizartablero():
     global columna
     global punteo
     if movimiento=="w":
+        if tablero[fila-1][columna]=="O":
+            punteo=punteo+10
         tablero[fila][columna]=" "
         fila=fila-1
         tablero[fila][columna]="<"
         print("te moviste arriba")
-        print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n ")
+        if tablero[fila][columna]=="O":
+            punteo=punteo+10  
+        print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\n")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
     elif movimiento=="a":
+        if tablero[fila][columna-1]=="O":
+            punteo=punteo+10
         tablero[fila][columna]=" "
         columna=columna-1
         tablero[fila][columna]="<"
@@ -63,6 +70,8 @@ def actualizartablero():
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
     elif movimiento=="s":
+        if tablero[fila+1][columna]=="O":
+            punteo=punteo+10
         tablero[fila][columna]=" "
         fila=fila+1
         tablero[fila][columna]="<"
@@ -73,6 +82,8 @@ def actualizartablero():
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
     elif movimiento=="d":
+        if tablero[fila][columna+1]=="O":
+            punteo=punteo+10
         tablero[fila][columna]=" "
         columna=columna+1
         tablero[fila][columna]="<"
@@ -85,8 +96,7 @@ def actualizartablero():
     elif movimiento == "f":
         print("ganar=true")
         ganar=True
-    if tablero[fila][columna]=="O":
-        punteo=punteo+10        
+          
 
 
 
