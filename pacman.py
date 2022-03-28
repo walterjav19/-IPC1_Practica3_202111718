@@ -17,6 +17,9 @@ tablero=[[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]]
 
+
+
+
 def imprimirtablero(pre,par,fan):
     for x in range(0,pre):
         fil=randint(0,4)
@@ -31,7 +34,10 @@ def imprimirtablero(pre,par,fan):
         col=randint(0,5)
         tablero[fil][col]="@"
     tablero[fila][columna]="<"  
-
+    global vida
+    global punteo
+    vida=1
+    punteo=0
     print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\nVidas: {vida}\n")
     print("---------------")
     for i in range(0,5):
@@ -40,13 +46,13 @@ def imprimirtablero(pre,par,fan):
 
 
 def actualizartablero():
+    global ganar
     movimiento=input("")
     global fila
     global columna
     global punteo
-    global ganar
     global vida
-    if movimiento=="w":
+    if movimiento.lower()=="w":
         if tablero[fila-1][columna]=="O":
             punteo=punteo+10
         elif tablero[fila-1][columna]=="@":
@@ -55,16 +61,14 @@ def actualizartablero():
             fila=fila+1
         tablero[fila][columna]=" "
         fila=fila-1
-        tablero[fila][columna]="<"        
-        print("te moviste arriba")
-        if tablero[fila][columna]=="O":
-            punteo=punteo+10  
+        tablero[fila][columna]="<"       
+        print("te moviste arriba") 
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\nVidas: {vida}\n")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
-    elif movimiento=="a":
+    elif movimiento.lower()=="a":
         if tablero[fila][columna-1]=="O":
             punteo=punteo+10
         elif tablero[fila][columna-1]=="@":
@@ -74,13 +78,14 @@ def actualizartablero():
         tablero[fila][columna]=" "
         columna=columna-1
         tablero[fila][columna]="<"
+        
         print("te moviste a la izquierda")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\nVidas: {vida}\n ")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
-    elif movimiento=="s":
+    elif movimiento.lower()=="s":
         if tablero[fila+1][columna]=="O":
             punteo=punteo+10
         elif tablero[fila+1][columna]=="@":
@@ -90,13 +95,14 @@ def actualizartablero():
         tablero[fila][columna]=" "
         fila=fila+1
         tablero[fila][columna]="<"
+        
         print("te moviste abajo")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\nVidas: {vida}\n ")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
-    elif movimiento=="d":
+    elif movimiento.lower()=="d":
         if tablero[fila][columna+1]=="O":
             punteo=punteo+10
         elif tablero[fila][columna+1]=="@":
@@ -106,23 +112,23 @@ def actualizartablero():
         tablero[fila][columna]=" "
         columna=columna+1
         tablero[fila][columna]="<"
+        
         print("te moviste a la derecha")
         print(f"--------------\nUsuario: {nombre}\nPunteo: {punteo}\nVidas: {vida}\n")
         print("---------------")
         for i in range(0,5):
             print("|",tablero[i][0],tablero[i][1],tablero[i][2],tablero[i][3],tablero[i][4],tablero[i][5],"|")  
         print("---------------")
-    elif movimiento == "f":
+    elif movimiento.lower() == "f":
         print("partida terminada")
         ganar=True
     if vida==0:
         ganar=True
         print("perdiste intenta de nuevo")
-
-          
-
-
-
+    if tablero[0][0]!="O" and tablero[0][1]!="O" and tablero[0][2]!="O" and tablero[0][3]!="O" and tablero[0][4]!="O" and tablero[0][5]!="O" and tablero[1][0]!="O" and tablero[1][1]!="O" and tablero[1][2]!="O" and tablero[1][3]!="O" and tablero[1][4]!="O" and tablero[1][5]!="O" and tablero[2][0]!="O" and tablero[2][1]!="O" and tablero[2][2]!="O" and tablero[2][3]!="O" and tablero[2][4]!="O" and tablero[2][5]!="O" and tablero[3][0]!="O" and tablero[3][1]!="O" and tablero[3][2]!="O" and tablero[3][3]!="O" and tablero[3][4]!="O" and tablero[3][5]!="O" and tablero[4][0]!="O" and tablero[4][1]!="O" and tablero[4][2]!="O" and tablero[4][3]!="O" and tablero[4][4]!="O" and tablero[4][5]!="O":
+        ganar=True        
+        print("Ganaste Felicidades!!!!!")
+            
 while opcion!=2:
     print("===== MENU DE INICIO =====\n1. Iniciar juego\n2. Salir")
     opcion= int(input())
@@ -132,6 +138,7 @@ while opcion!=2:
         paredes=randint(5,12)
         fantasmas=randint(1,6)
         imprimirtablero(premios,paredes,fantasmas)
+        ganar=False
         while ganar !=True:
             actualizartablero()        
     elif opcion==2:
