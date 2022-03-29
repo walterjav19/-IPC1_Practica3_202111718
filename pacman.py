@@ -1,5 +1,3 @@
-from operator import index
-from pickle import TRUE
 from random import randint
 opcion=0
 premios=0
@@ -17,7 +15,13 @@ tablero=[[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]
         ,[" "," "," "," "," "," "]]
 
-
+def limpiartablero():
+    global tablero
+    tablero=[[" "," "," "," "," "," "]
+        ,[" "," "," "," "," "," "]
+        ,[" "," "," "," "," "," "]
+        ,[" "," "," "," "," "," "]
+        ,[" "," "," "," "," "," "]]
 
 
 def imprimirtablero(pre,par,fan):
@@ -137,6 +141,7 @@ while opcion!=2:
         premios=randint(3,6)
         paredes=randint(5,12)
         fantasmas=randint(1,6)
+        limpiartablero()
         imprimirtablero(premios,paredes,fantasmas)
         ganar=False
         while ganar !=True:
